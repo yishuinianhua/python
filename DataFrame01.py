@@ -32,8 +32,10 @@ fun = lambda x : x + 2
 print df.apply(fun)
 """
 显示head,tail,
-index:索引,
-列名,值,转置,按值进行排序,按轴进行排序
+index:索引,即行
+columns:列名
+values:值,
+T:转置,按值进行排序,按轴进行排序
 sort_index按照行索引排序
 sort_index(axis=1)按照列名排序
 """
