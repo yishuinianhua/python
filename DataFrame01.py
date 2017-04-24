@@ -16,6 +16,7 @@ datas = pd.date_range('20170410',periods=6)
 #df = pd.DataFrame(np.random.randn(10,4),index=datas,columns=list('ABCD'))
 """
 通过字典的方式创建DataFrame
+index表示行,columns表示列
 """
 df = pd.DataFrame([[1,0,9,8],[2,3,4,5],[0,9,8,7],[4,1,2,0],[6,7,1,3],[0,-1,-2,-6]],index=datas,columns=list('ZXCV'))
 print df
