@@ -4,6 +4,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 #import MySQLdb,csv,os
 from django.db import transaction,IntegrityError
 from models import python_tomcat,tomcatlog
+from models import Colors,Clothes,Ball,Child
 from django.template import RequestContext
 import urllib2
 import json
@@ -91,81 +92,55 @@ def fun1(request):
 
     
         
-# def index(req):
-#     return render_to_response('index.html')
-# def modify(req):
-#     return render_to_response('modify.html')
-# def search(req):
-# #     search = req.GET.get('search',None)
-#     result = Server.objects.all()
-#     listarray = []
-#     for item in result:
-#         listarray.append([item.hostname,item.nodeType,item.cabinet,item.location,item.em1IP,item.em1SwitchPort,item.memory,item.vcpu,item.disk,item.fqdn,item.sn,item.manageIP,item.em2IP,item.em2SwitchPort,item.em3IP,item.em3SwitchPort,item.em4IP,item.em4SwitchPort])
-#     serverString =""
-#     for item in listarray:
-#         serverString += "<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th><button  id='change' style='height:30px' class='btn btn-success submit achange'>编辑</button>&nbsp<button id='del' class='btn btn-success submit con adel'>删除</button></th></tr>" %(item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7],item[8],item[9],item[10],item[11],item[12],item[13],item[14],item[15],item[16],item[17])
-#     print serverString    
-#     return render_to_response('search.html',{'result':result})
-# def restart(req):
-#     item = req.GET.get('item')
-#     return HttpResponse(item)
-# def delete(req):
-#     delete = req.GET.get('delete',None)
-#     if delete != None:
-#         Server.objects.filter(hostname=delete).delete()
-#     return render_to_response('delete.html')
-#     
-# def add(req):
-#     hostname=req.GET.get('hostname',None)
-#     nodeType=req.GET.get('nodeType',None)
-#     cabinet=req.GET.get('cabinet',None)
-#     location=req.GET.get('location',None)
-#     em1IP=req.GET.get('em1IP',None)
-#     em1SwitchPort=req.GET.get('em1SwitchPort',None)
-#     memory=req.GET.get('memory',None)
-#     vcpu=req.GET.get('vcpu',None)
-#     disk=req.GET.get('disk',None)
-#     fqdn=req.GET.get('fqdn',None)
-#     sn=req.GET.get('sn',None)
-#     manageIP=req.GET.get('manageIP',None)
-#     em2IP=req.GET.get('em2IP',None)
-#     em2SwitchPort=req.GET.get('em2SwitchPort',None)
-#     em3IP=req.GET.get('em3IP',None)
-#     em3SwitchPort=req.GET.get('em3SwitchPort',None)
-#     em4IP=req.GET.get('em4IP',None)
-#     em4SwitchPort=req.GET.get('em4SwitchPort',None)
-#     if hostname != None and nodeType != None:
-#         Server.objects.create(hostname=hostname,nodeType=nodeType,cabinet=cabinet,location=location,em1IP=em1IP,em1SwitchPort=em1SwitchPort,memory=memory,vcpu=vcpu,disk=disk,fqdn=fqdn,sn=sn,manageIP=manageIP,em2IP=em2IP,em2SwitchPort=em2SwitchPort,em3IP=em3IP,em3SwitchPort=em3SwitchPort,em4IP=em4IP,em4SwitchPort=em4SwitchPort)
-#     return render_to_response('add.html')
-# #测试方便，路径是windows路径，/home/lihao/mysite/admin/
-# def information_table(information):
-#         File='D:\%s.csv' % information
-#         csvfile = file('%s' % File, 'w')
-#         spawriter = csv.writer(csvfile)
-#         mysql_action ="select * from %s;"  % information
-#         con= MySQLdb.connect(host='172.24.147.240',user='root',passwd='root',db='testapp',charset='utf8')
-#         cursor =con.cursor()
-#         cursor.execute(mysql_action)
-#         row=cursor.fetchall()
-#         if information == 'testapp_server':
-#             spawriter.writerow(['主机名'.decode('utf-8').encode('gb2312'),'节点类型'.decode('utf-8').encode('gb2312'),'机柜编号'.decode('utf-8').encode('gb2312'),'位置'.decode('utf-8').encode('gb2312'),'em1','交换机端口'.decode('utf-8').encode('gb2312'),'内存G'.decode('utf-8').encode('gb2312'),'VCPU','磁盘'.decode('utf-8').encode('gb2312'),'FQDN','SN','管理IP'.decode('utf-8').encode('gb2312'),'em2','交换机端口'.decode('utf-8').encode('gb2312'),'em3','交换机端口'.decode('utf-8').encode('gb2312'),'em4','交换机端口'.decode('utf-8').encode('gb2312')])       
-#         elif information == 'testapp_virtual':
-#             spawriter.writerow(['虚拟机主机名'.decode('utf-8').encode('gb2312'),'应用环境'.decode('utf-8').encode('gb2312'),'IP地址'.decode('utf-8').encode('gb2312'),'物理配置'.decode('utf-8').encode('gb2312'),'宿主机'.decode('utf-8').encode('gb2312'),'宿主机IP'.decode('utf-8').encode('gb2312'),'cephfs','备注'.decode('utf-8').encode('gb2312')])
-#         elif information == 'testapp_beta_virtual':
-#             spawriter.writerow(['宿主机'.decode('utf-8').encode('gb2312'),'宿主机IP'.decode('utf-8').encode('gb2312'),'虚拟机主机名'.decode('utf-8').encode('gb2312'),'应用环境'.decode('utf-8').encode('gb2312'),'IP地址'.decode('utf-8').encode('gb2312'),'物理配置'.decode('utf-8').encode('gb2312'),'cephfs','备注'.decode('utf-8').encode('gb2312')])
-#         elif information == 'testapp_logstach':
-#             spawriter.writerow(['宿主机'.decode('utf-8').encode('gb2312'),'宿主机IP'.decode('utf-8').encode('gb2312'),'虚拟机主机名'.decode('utf-8').encode('gb2312'),'应用环境'.decode('utf-8').encode('gb2312'),'IP地址'.decode('utf-8').encode('gb2312'),'物理配置'.decode('utf-8').encode('gb2312'),'isci','cephfs','备注'.decode('utf-8').encode('gb2312')])
-#         elif information == 'testapp_apache':
-#             spawriter.writerow(['宿主机'.decode('utf-8').encode('gb2312'),'宿主机IP'.decode('utf-8').encode('gb2312'),'虚拟机主机名'.decode('utf-8').encode('gb2312'),'应用环境'.decode('utf-8').encode('gb2312'),'IP地址'.decode('utf-8').encode('gb2312'),'物理配置'.decode('utf-8').encode('gb2312'),'cephfs','备注'.decode('utf-8').encode('gb2312')])
-#         data=[]
-#         for i in row:
-#                 data.append(i)
-#         spawriter.writerows(data)
-#         csvfile.close()
-#         con.close()
-#         
-# #需要js触发svn函数        
-# def svn(req):
-#         print "Hello"
-#         os.system("svn ci /home/lihao/mysite/admin/server.csv")
-#         return render_to_response('index.html')
+"""
+values是获取数据库 表的某一个字段
+__contains 等价于like
+filter表示模糊匹配，get表示精确匹配
+"""
+def fun2(request):
+    result = tomcatlog.objects.filter(module__contains='hecko',app='checkout').values('action')
+    for item in result:
+        print item['action']
+    return HttpResponse("Django mysql values去某一列的值")
+
+"""
+数据库的一对一测试
+很恶心没有找到查询所有的方法
+"""    
+def fun3(request):
+    cc = Colors.objects.get(ball__description='blue ball')
+    
+    return HttpResponse("Django Mysql表一对一测试")
+
+"""
+一对一映射默认映射母表的主键，如果没有指定主键则默认是id
+onetoonefield
+一种颜色对应一个皮球
+"""   
+def one_to_one(request):
+    print Colors.objects.get(ball__description='红球').ball.color
+    return HttpResponse("django mysql 一对一测试")
+
+"""
+一对多
+foreign key
+一件衣服对应多个颜色,外键
+"""
+def one_to_many(request):
+    obj = Clothes.objects.filter(color=Colors.objects.get(colors='red'))
+    print obj
+    return HttpResponse("Django mysql一对多测试")
+
+"""
+多对多测试
+多对多情况下数据库会多生成表的favor
+manytomanyfield
+"""
+def many_to_many(request):
+    obj = Child.objects.get(name='yi')
+    print obj.favor.all()
+    return HttpResponse("Django mysql多对多测试")
+"""
+Django mysql数据库的强制清空命令 python manage.py migrate testapp --fake
+"""
+
