@@ -6,6 +6,7 @@ from django.db import transaction,IntegrityError
 from models import python_tomcat,tomcatlog
 from models import Colors,Clothes,Ball,Child
 from django.template import RequestContext
+from django.db.models import Q
 import urllib2
 import json
 import testapp.auth
@@ -143,4 +144,11 @@ def many_to_many(request):
 """
 Django mysql数据库的强制清空命令 python manage.py migrate testapp --fake
 """
-
+"""
+Q表示django数据库中的或者条件
+"""
+def Q_test(request):
+    content = tomcatlog.objects.filter(Q(module='django')|Q(app='checkout'))
+    for item in content:
+        print item.id,item.module,item.app,item.action,item.submitter
+    return HttpResponse("Django mysql Q数据库查询或者")
