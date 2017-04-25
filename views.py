@@ -57,6 +57,14 @@ def login(request):
     return render_to_response('login.html',context_instance=RequestContext(request))
 """
 logger记录日志，开发者自定义的日志
+request.session.set_expiry(value)
+
+你可以传递四种不同的值给它：
+
+* 如果value是个整数，session会在些秒数后失效。
+* 如果value是个datatime或timedelta，session就会在这个时间后失效。
+* 如果value是0,用户关闭浏览器session就会失效。
+* 如果value是None,session会依赖全局session失效策略。
 """
 def validate(request):
     username = request.POST.get('username')
