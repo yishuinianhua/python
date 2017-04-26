@@ -15,9 +15,10 @@ d = pd.DataFrame(data,index=hand,columns=lie)
 nf = pd.Series([1,4,7,np.nan],index=['Z','X','C','V'])
 #print nf.reindex()
 """
-fillna不全缺失的值
+fillna补全缺失的值
 dropna删除缺失的值
 规律是对数据的操作都不会更改原来的数据
+reindex重新索引
 """
 print nf.dropna(how='any')
 print nf.fillna(value=10)
