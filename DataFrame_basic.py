@@ -61,3 +61,8 @@ dfint = pd.DataFrame(np.random.randint(10,20,size=5),index=pd.date_range('201705
 #只有Series才有value_counts()函数统计value的重复值
 df = pd.Series(np.random.randint(10,20,size=20))
 df.value_counts()
+df.mode()
+#mode()数量最多的，前面的0,1,2数字排序
+#df3,df4是2个DataFrame,concat是合并DataFrame
+df5=pd.concat([df3,df4])
+
