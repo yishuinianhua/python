@@ -80,4 +80,7 @@ sort_index(axis=1)按照列名排序
 #print df[df>0]
 """
 DataFrame按照值和索引进行排序
+尽量使用df['B']这种格式，不要使用df.B,我发现很多场合报错
+isin判断是否有
 """
+df1[df1['Tag'].isin(['a','c'])]
