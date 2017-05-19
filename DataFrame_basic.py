@@ -14,6 +14,10 @@ d = pd.DataFrame(data,index=hand,columns=lie)
 
 nf = pd.Series([1,4,7,np.nan],index=['Z','X','C','V'])
 #print nf.reindex()
+df = pd.DataFrame(np.random.randn(6,4),index=list('ABCDEF'),columns=list('qwer'))
+#新增gift列
+df['gift'] = ['python','django','pandas','scrapy',np.nan,np.nan]
+
 """
 fillna补全缺失的值
 dropna删除缺失的值
