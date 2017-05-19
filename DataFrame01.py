@@ -49,10 +49,11 @@ sort_index(axis=1)按照列名排序
 #print df.sort_index() 
 #print df.sort_values(by='X')
 #print df.sort_index(axis=1,ascending=True) #按照C V X Z排序
+#print df.sort_values(by='B') #按照B这一列进行排序
 """
 选择,切片
 """
-#print df['B']
+#print df['B'] <==> df.B
 #print df[0:1] #这个输出的是行
 #print df['20170412':'20170413']
 #print df.loc[datas[0]]
