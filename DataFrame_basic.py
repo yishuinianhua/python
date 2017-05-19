@@ -56,4 +56,8 @@ df = pd.DataFrame([[1,2,3],[4,5,6]])
 print df.apply(lambda x:x+2)
 print df.apply(lambda x:x.max() - x.min(),axis=1)
 
-
+#产生5个10-20之间的二维数组
+dfint = pd.DataFrame(np.random.randint(10,20,size=5),index=pd.date_range('20170519',periods=5),columns=['A'])
+#只有Series才有value_counts()函数统计value的重复值
+df = pd.Series(np.random.randint(10,20,size=20))
+df.value_counts()
