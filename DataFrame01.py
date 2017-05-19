@@ -63,7 +63,7 @@ sort_index(axis=1)按照列名排序
 """
 #print df.loc['20170412':'20170415',['C','D']]
 #print df.loc[datas[0],'B']
-
+#print df.at[pd.Timestamp('20170522'),'B'] #at必须使用时间戳的形式，否则会报错的
 """
 通过数值进行切片
 """
