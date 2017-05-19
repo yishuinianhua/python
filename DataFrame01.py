@@ -72,6 +72,7 @@ sort_index(axis=1)按照列名排序
 #print df.iloc[:,1:3] # 对行进行切片
 #print df.iloc[1:2,:] # 对列进行切片
 #print df.iloc[0,0]
+#print df.iat[1,1] #iat效率泌iloc效率高得多
 """
 布尔
 """
