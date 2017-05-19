@@ -17,7 +17,8 @@ nf = pd.Series([1,4,7,np.nan],index=['Z','X','C','V'])
 df = pd.DataFrame(np.random.randn(6,4),index=list('ABCDEF'),columns=list('qwer'))
 #新增gift列
 df['gift'] = ['python','django','pandas','scrapy',np.nan,np.nan]
-
+#第一个any会筛选列
+pd.isnull(df).any().any()
 """
 fillna补全缺失的值
 dropna删除缺失的值
