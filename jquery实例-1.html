@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <meta charset="UTF-8">
+    <script src="vue.js"></script>
+	<script src="jquery.min.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+		<style>
+			.font-size{
+				color:red;
+			}
+			.back-color{
+				background-color:yellow;
+			}
+			.change-color{
+				background-color:white;
+			}
+		</style>
+		<title>Get/Post/Jsonp</title>
+	</head>
+	<body>
+		<input type="text" class="c01" value="v1"/>
+		<input type="text" class="c01" value="v2"/>
+		<input type="text" class="c01" value="v3"/>
+		<input type="text" class="c01" value="v4"/>
+		<select >
+			<option >python</option>
+			<option selected="selected">Vue</option>
+			<option >jquery</option>
+			<option >java</option>
+		</select>
+		<table border="1" class="table01">
+			<tr>
+				<td>flask</td><td>django</td><td>tornado</td>
+			</tr>
+			<tr>
+				<td>spring</td><td>mybatis</td><td>springboot</td>
+			</tr>
+			<tr>
+				<td>thinkphp</td><td>..</td><td>php</td>
+			</tr>
+		</table>
+		<div id="u-li">
+			<li>beijing</li>
+			<li>New York</li>
+			<li>Shanghai</li>
+		</div>
+		
+		<ul>
+			<li>John</li>
+			<li>Karl</li>
+			<li>Brandon</li>
+		</ul>
+		<ul>
+			<li>Glen</li>
+			<li>Tane</li>
+			<li>Ralph</li>
+		</ul>
+		全选<input type="checkbox" id="check01" value="v1"/><br/>
+		<input type="checkbox" class="check01" value="v1"/>
+		<input type="checkbox" class="check01" value="v2"/>
+		<input type="checkbox" class="check01" value="v3"/>
+		<input type="checkbox" class="check01" value="v4"/>
+		<script type="text/javascript">
+		<!--each在javascript高效使用 涉及到层级-->
+		$(function(){
+			$('#check01').click(function(){
+				if($(this).is(':checked')){
+					$("input[class='check01']").attr("checked",true);
+				}else{
+					$("input[class='check01']").attr("checked",false);
+				}
+				
+			})
+			$('.c01').each(function(){
+			//	console.log($(this).val());
+			
+			})
+			$('option').each(function(){
+			//	console.log($(this).text());
+			})
+			$('.table01 tr').find('td:eq(1)').each(function(){
+			//	console.log("11");
+			})
+			//gt大于
+			$('.table01 tr').find('td:gt(0)').each(function(){
+				
+				$(this).addClass('font-size');
+			})
+			$('#u-li li').each(function(){
+				$(this).text('China');
+			})
+			//:nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，不论元素的类型。 但同时有2个ul时第二个不生效
+			$("ul li:nth-child(2)").css('background-color','red');
+			
+			$("body ul:nth-child(2) li:eq(0)").css('background-color','blue');
+			
+			//val()有效 text() html()无效
+			$('input[class="c01"]').each(function(){
+			//	console.log($(this).val());
+			})
+			$('table tr:even').each(function(){
+				$(this).css('background-color','yellow');
+			})
+		})
+		</script>
+	</body>
+</html>
