@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			.font-size{
+				color:red;
+			}
+			.back-color{
+				background-color:yellow;
+			}
+			.change-color{
+				background-color:white;
+			}
+		</style>
+		<title>Vue.js v1.0.16</title>
+	</head>
+	<body>
+		
+		<!--input1必须和Vue data中对应的值进行匹配 v-model数据双向绑定-->
+		<input v-model="input1" type="text"/>
+		{{input1}}
+		<!--数据只绑定一次-->
+		{{*input1}}
+		<!--v-html中绑定格式-->
+		<div v-html="input1"></div>
+		选项:<select v-model="selection">
+			<option>1</option>
+			<option>2</option>
+		</select>
+		{{selection}}<br>
+		<!--v-bind-->
+		<!--v-on-->
+		<input type="button" value="按钮" @click="get('zhangsan',20)"/>
+		<!--ajax测试-->
+		<input type="button" value="ajax测试" onclick="ajax_test()"/>
+		<!-- for循环-->
+		<div v-for="item in arr">
+			<span v-text="item.name"></span>
+			<span v-text="$index"></span>
+		</div>
+		<!--运算-->
+		<span id="app2" v-text="num+1">
+				
+		</span>
+		
+		<!-- JavaScript 代码需要放在尾部（指定的HTML元素之后） -->
+		<!-- this代表new的这个对象，data里面的值必须初始化-->
+		<!-- jsonp用于实现跨域-->
+		<!--component注册组件 el表示装载的位置
+			事件的钩子
+			Vue.component全局注册组件的方法
+			v-bind动态绑定属性
+		-->
+		<!--ajax与Vue混用 -->
+		<!-- 第四章是Vue组件-->
+		<!-- 第五章是Vue-cli Vue路由-->
+		<!-- 状态管理插件vuex-->
+		<my-header></my-header>
+		<div id="app" v-text="school">
+			
+		</div>
+		<!--v-bind帮属性的动态绑定标签的属性 会直接取Vue中查找对应的值-->
+		<a :href="link">链接</a><br/>
+		<!--绑定class属性 只要是属性都用v-bind绑定-->
+		<span :class="classtr" class="back-color" @click="change">字体是红色？</span>
+		<div v-if="ifif">
+			if显示啦.......
+		</div>
+		<div id="app3">
+			<template id="aaa">
+			11111111111111
+			</template>
+		</div>
+		
+			
+		<div v-for="(k,v) in list">{{k}}--{{v}}--{{$index}}--{{$key}}</div>
+		<!---过滤器 currnency钱-->
+		{{'welcome'|uppercase}}
+		{{'ABCD'|lowercase}}
+		{{1234|currency 'Y'}}
+		<div>........................................................</div>
+		
+		<script src="vue.js"></script>
+		<script language="JavaScript">
+			// ES6 模板字符串
+			//Vue.config.delimiters = ['${', '}']
+			// 修改文本插值的定界符。
+			//Vue.config.unsafeDelimiters = ['{!!', '!!}']
+			// 修改原生 HTML 插值的定界符。
+		</script>
+		<script src="jquery.min.js"></script>
+		<script>
+			
+			//定义全局变量
+			Vue.component('my-header',{
+				template:'<span>全局变量定义</span>',
+			})
+			//	通常情况下是不使用template的
+			//#app  template可以使用data的数据
+			new Vue({
+				el:'#app',
+				data:{school:'Tsinghua University'},
+			})
+			new Vue({
+				el:'body',
+				data: {
+					selection:null,
+					ifif:true,
+					msg:'123',
+					num:6,
+					zujian:'zujian ceshi',
+					arr:[{name:'test'},{name:'mei'},{name:'female'}],
+					link:'http://www.sogou.com',
+					classtr:'font-size',
+					input1:'input-test',
+					list:['java','python','jquery','Vue']
+				},
+				methods:{
+					//以后全部使用省略形式的函数
+					get:function(){
+					//通过this调用data中的值,变量的值会反馈到页面
+					//数组 push增加，pop删除
+					//Vue.set修改arr数组第三项，最后项是json格式
+						this.arr.push({name:'new_add'}),
+					//	this.arr.pop({name:'female'})
+						Vue.set(this.arr,2,{name:"modify-name-female"}),
+						console.log(this.msg)
+					},
+					change(){
+						this.classtr = 'change-color';
+						//console.log("on key down");
+					}
+				}
+			});
+			//定义局部变量
+			//data的值必须是函数的形式返回
+			var vm = new Vue({ 
+				el: '#app3',  
+				components: { 
+					"add-button": { 
+					template: '#aaa', 
+					data: function () { 
+						return {btn: "局部变量测试..."}; 
+						},
+					methods:{
+						change(){this.btn = '局部变量被改变啦';}
+						
+					}
+				} 
+			  } 
+			});
+			</script>
+			<script type="text/javascript">
+			function ajax_test(){
+				alert("ajax test");
+				$.ajax({
+					type:'POST',
+					url:'exit1',
+					data:{username:args},
+					success:function(data){
+						window.location.href="index";
+					}
+				})
+			}
+		</script>
+	</body>
+</html>
