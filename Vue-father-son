@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue.js v1.0.16</title>
+	</head>
+	<body>
+		<!--template模板是不会显示的，也不会影响DOM结构-->
+		<!--全局变量的定义必须new Vue定义body-->
+		<!--html chils-msg对应js中的驼峰-->
+		<!--slot占位符-->
+		<!--$emit子组件发送数据，on接收数据-->
+		<!-- <test-global></test-global>
+		<template id="global">
+			{{msg}}
+		</template> -->
+		<div id="app">
+			<test-local>123456</test-local>
+		</div>
+
+		<template id="aaa">
+			<h3 @click="change">局部组件测试--{{local}}--{{msg}} </h3>
+			<slot></slot>
+			<!-- <bbb :m="local" :my-msg="msg"></bbb> -->
+			<bbb @child-msg="get"></bbb>
+		</template>
+
+		<template id="bbb">
+			<h1 @click="send">子组件---{{child}}</h1>
+		</template>
+		<script src="vue.js"></script>
+		<script>	
+			new Vue({
+				el:'#app',
+				//父组件的数据
+				components:{
+					'test-local':{
+						template:'#aaa',
+						
+						data(){
+							return{local:'父亲级数据',msg:100}
+						},
+						methods:{
+							change(){
+								this.local = '我改变了local的值';
+							},
+							get(msg){
+								this.local=msg;
+							}
+						},
+						//子组件的数据
+						components:{'bbb':{
+							template:'#bbb',
+							props:{
+								m:String,
+								myMsg:Number
+							},
+							data(){
+								return{child:'子组件'}
+							},
+
+							methods:{
+								send(){this.$emit('child-msg',this.child);}
+								}
+							},
+							
+							
+						}
+					}
+				}
+			});
+
+			Vue.component('test-global',{
+				template:'#global',
+				//data是一个函数,返回的是json格式的数据
+				data(){
+					return{
+						msg:'全局组件中的数据',info:'hello world'
+					}
+				},
+				
+				methods:{
+					change(){
+						this.info = '我改变了info的值';
+					}
+				}
+			});
+
+			new Vue({
+
+				el:'body'
+			})
+			
+		</script>
+		
+			
+	</body>
+</html>
