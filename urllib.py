@@ -76,9 +76,34 @@ urllib2 默认会使用环境变量 http_proxy 来设置 HTTP Proxy。假如一�
 
 '''
 
-
-
-
+"""标准格式的requests post/get方式请求"""
+def get_mail_token(company):
+    # 每隔2小时调用tencent接口获取token，保存到redis数据库中
+    # 获取腾讯企业邮箱token,获取token需要管理员账号,秘钥,授权方式
+    data = dict()
+    if company == 'zhongan':
+        data = {
+            "client_id": app.config['CLIENT_ID_ZHONGAN'],
+            "client_secret": app.config['CLIENT_SECRET_ZHONGAN'],
+            "grant_type": "client_credentials"
+        }
+        elif company == 'zatech':
+            data = {
+                "client_id": app.config['CLIENT_ID_ZATECH'],
+                "client_secret": app.config['CLIENT_SECRET_ZATECH'],
+                "grant_type": "client_credentials"
+            }
+            url = app.config['MAIL_API_HOST']+'/gettoken'
+            try:
+                response = requests.post(url, data, timeout=20)
+                out_logger.info(response.content)
+                mail_token = response.json().get("access_token")
+                out_logger.info("got token: " + str(mail_token))
+                return mail_token
+            except Exception, e:
+                out_logger.exception("get tokens fail %s", e)
+                return False
+            
 
 
 
