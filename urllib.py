@@ -77,11 +77,10 @@ urllib2 默认会使用环境变量 http_proxy 来设置 HTTP Proxy。假如一�
 '''
 
 """标准格式的requests post/get方式请求"""
-try:
                 response = requests.post(url, data, timeout=20)
                 out_logger.info(response.content)
-                mail_token = response.json().get("access_token")
-                out_logger.info("got token: " + str(mail_token))
+                mail_token = response.json().get("XXXX")
+                out_logger.info("got token: " + str(XXXXX))
                 return mail_token
             except Exception, e:
                 out_logger.exception("get tokens fail %s", e)
