@@ -40,7 +40,7 @@ POST方式
 如果有data直接转变为post方式
 '''
 user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
-value = {"username":"kaifa","password":"kaifa"}
+value = {"username":"***","password":"***"}
 headers = {"User-Agent":user_agent}
 data = urllib.urlencode(value)
 print data
@@ -77,9 +77,7 @@ urllib2 默认会使用环境变量 http_proxy 来设置 HTTP Proxy。假如一�
 '''
 
 """标准格式的requests post/get方式请求"""
-def get_mail_token(company)
-    data = dict()
-            try:
+try:
                 response = requests.post(url, data, timeout=20)
                 out_logger.info(response.content)
                 mail_token = response.json().get("access_token")
