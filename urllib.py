@@ -3,7 +3,7 @@
 
 # import redis
 #
-# r = redis.Redis(host="172.25.201.58",port=6379,passwd="redis")
+# r = redis.Redis(host="****",port=***,passwd="***")
 # r.get("java")
 #print urlopen("http://www.baidu.com",timeout=10).read()
 '''
@@ -44,7 +44,7 @@ value = {"username":"kaifa","password":"kaifa"}
 headers = {"User-Agent":user_agent}
 data = urllib.urlencode(value)
 print data
-url = "http://172.25.201.58/validate"
+url = "****/validate"
 request = urllib2.Request(url,data,headers)
 response = urllib2.urlopen(request,timeout=3)
 print response.read()
@@ -57,11 +57,11 @@ urlopen方法了，第三个参数就是timeout的设置，可以设置等待多
 '''
 value={}
 
-value["username"] = "devmanager"
-value["password"] = "devmanager"
+value["username"] = "****"
+value["password"] = "****"
 
 data = urllib.urlencode(value)
-url = "http://172.25.201.58/validate"
+url = "****/validate"
 geturl = url + "?" + data
 print geturl
 request = urllib2.Request(geturl)
@@ -79,7 +79,6 @@ urllib2 默认会使用环境变量 http_proxy 来设置 HTTP Proxy。假如一�
 """标准格式的requests post/get方式请求"""
 def get_mail_token(company)
     data = dict()
-            url = app.config['MAIL_API_HOST']+'/gettoken'
             try:
                 response = requests.post(url, data, timeout=20)
                 out_logger.info(response.content)
